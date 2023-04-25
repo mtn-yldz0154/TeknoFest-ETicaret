@@ -1,0 +1,46 @@
+﻿@model List<Category>
+@{
+    ViewData["Title"] = "GetCategory";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Kategoriler</h1>
+<hr />
+<br />
+
+<table class="table table-bordered table-striped table-hover table-warning">
+
+    <thead>
+
+        <tr>
+            <th>Id</th>
+            <th>Kategori Adı</th>
+            <th>Kategori Açıklama</th>
+            <th>Detay</th>
+            <th>Düzenle</th>
+            <th>Sil</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>@item.CategoryId</td>
+                <td>@item.CategoryName</td>
+                <td>@item.CategoryDespcription</td>
+                <td> <a href="/admin/categoryDetails/@item.CategoryId" class="btn btn-outline-success">Detay</a>  </td>
+                <td> <a href="/admin/updatecategory/@item.CategoryId" class="btn btn-outline-info">Düzenle</a>  </td>
+                <td> <a href="/admin/deletecategory/@item.CategoryId" class="btn btn-outline-danger">Sil</a>  </td>
+
+            </tr>
+        }
+
+
+    </tbody>
+</table>
+
+<a class="ml-3 btn btn-outline-primary" href="/admin/addcategory">Kategori Ekle</a>
+

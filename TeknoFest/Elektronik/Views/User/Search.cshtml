@@ -1,0 +1,137 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+ @if(Model.Count()>0)
+    {
+<br /><br />
+<h4 style="margin-left:30px" class="text-primary"> "@ViewBag.q" İle Çıkan Sonuçlar </h4>
+<hr />
+<br />
+
+<section class="pt-3">
+   
+    <div class="container">
+
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <figure class="card shadow">
+                        <div>
+                            @if (item.StarNumber == 0)
+                            {
+                                <div class="rating-wrap">
+                                    <span class="fa fa-star "></span>
+                                    <span class="fa fa-star "></span>
+                                    <span class="fa fa-star "></span>
+                                    <span class="fa fa-star "></span>
+                                    <span class="fa fa-star"></span>
+                                </div>
+                            }
+                            @if (item.StarNumber > 0 && item.StarNumber <= 20)
+                            {
+                                <div class="rating-wrap">
+                                    <span class="fa fa-star checked "></span>
+                                    <span class="fa fa-star "></span>
+                                    <span class="fa fa-star "></span>
+                                    <span class="fa fa-star "></span>
+                                    <span class="fa fa-star"></span>
+                                </div>
+                            }
+                            @if (item.StarNumber > 20 && item.StarNumber <= 40)
+                            {
+                                <div class="rating-wrap">
+                                    <span class="fa fa-star checked "></span>
+                                    <span class="fa fa-star checked "></span>
+                                    <span class="fa fa-star "></span>
+                                    <span class="fa fa-star "></span>
+                                    <span class="fa fa-star"></span>
+                                </div>
+                            }
+                            @if (item.StarNumber > 40 && item.StarNumber <= 60)
+                            {
+                                <div class="rating-wrap">
+                                    <span class="fa fa-star checked "></span>
+                                    <span class="fa fa-star checked "></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star "></span>
+                                    <span class="fa fa-star"></span>
+                                </div>
+                            }
+                            @if (item.StarNumber > 60 && item.StarNumber <= 80)
+                            {
+                                <div class="rating-wrap">
+                                    <span class="fa fa-star checked "></span>
+                                    <span class="fa fa-star checked "></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked "></span>
+                                    <span class="fa fa-star"></span>
+                                </div>
+                            }
+                            @if (item.StarNumber > 80)
+                            {
+                                <div class="rating-wrap">
+                                    <span class="fa fa-star checked "></span>
+                                    <span class="fa fa-star checked "></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked "></span>
+                                    <span class="fa fa-star checked"></span>
+                                </div>
+                            }
+                        </div>
+                        <a href="/user/productdetails/@item.ProductId" class="img-wrap">
+                            @if (item.SaleProductPrice > 0)
+                            {
+                                <b class="badge bg-success"> İndirim </b>
+                            }
+
+                            <img src="~/img/@item.ProductImageUrl" alt="">
+
+                        </a>
+                        <figcaption class="info-wrap border-top">
+
+                            <form asp-controller="Like" asp-action="AddToLike" method="post">
+                                <input type="hidden" name="productId" value="@item.ProductId" />
+                                <button style="margin-left:5px;" class="mr-2 float-end btn btn-light btn-icon">
+                                    <i class="fa fa-heart"></i>
+                                </button>
+
+                            </form>
+                            <form asp-controller="Cart" asp-action="AddToCart" method="post">
+                                <input type="hidden" name="productId" value="@item.ProductId" />
+                                <input type="hidden" name="quantity" value="1" />
+                                <button class="mr-2 float-end btn btn-light btn-icon">
+                                    <i class="fa fa-shopping-cart"></i>
+                                </button>
+
+                            </form>
+                            <a href="" class="title text-truncate">
+                                @item.ProductName
+                            </a>
+                            <div class="price-wrap">
+                                <span class="price">@item.ProductPrice</span>
+                                <del class="price-old">6.999 TL</del>
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+            }
+
+
+
+
+        </div>
+    </div>
+    
+</section>
+
+}
+else{
+    <div style="margin-bottom:370px;margin-top:30px" class="alert alert-primary">
+        <h4 style="margin-left:30px" class="text-primary"> "@ViewBag.q" İle Sonuç Bulunamadı </h4>
+      </div>
+}

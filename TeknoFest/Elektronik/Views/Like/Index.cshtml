@@ -1,0 +1,97 @@
+﻿@model Like
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section   style="background-color:lightgrey;">
+    <div  class="container h-100">
+        <br />
+        
+        <div class="row d-flex justify-content-center align-items-center ">
+   <br />
+            <div class="col">
+                <div class="card mb-2">
+                    <br />
+                    <p><span style="margin-left:30px" class="h1 text-primary"><i class ="fa fa-heart">
+                        </i>    Favorilerim   </span></p>
+                    <div class="card-body p-4">
+                        @if(Model.LikeItems.Count>0)
+                        {
+                            @foreach (var item in Model.LikeItems)
+                            {
+                                <div class="row align-items-center">
+                                    <div class="col-md-2">
+                                        <img src="~/img/@item.Product.ProductSmallImageUrl"
+                                     class="img-fluid" alt="Generic placeholder image">
+                                    </div>
+                                    <div class="col-md-4  justify-content-center">
+                                        <div>
+                                            <p class="small text-dark mb-4 pb-2"><strong style="margin-left:60px">Ürün Adı</strong> </p>
+                                            <p style="margin-left:60px" class="lead text-primary fw-normal mb-0">@item.Product.ProductName</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-1 d-flex justify-content-center">
+                                        <div>
+                                            <p class="small text-dark  mb-4 pb-2"><strong>Ürün Rengi</strong></p>
+                                            <p class="lead text-primary  fw-normal mb-0">
+
+                                                @item.Product.ProductOzellik
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2 d-flex justify-content-center">
+                                        <div>
+                                            <p class="small text-dark  mb-4 pb-2"><strong>Ürün Fiyatı</strong></p>
+                                            <p class="lead text-primary  fw-normal mb-0">@item.Product.ProductPrice.ToString("c")</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 d-flex justify-content-center">
+                                        <div>
+                                            <p class="small text-dark  mb-4 pb-2"><strong>Kaldır</strong></p>
+                                            <form asp-controller="Like" asp-action="DeleteLike" method="post">
+                                                <input type="hidden" name="productId" value="@item.ProductId">
+                                                <button title="Favorilerden Sil" class="btn text-primary ">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 d-flex justify-content-center">
+                                        <div>
+                                            <p class="small text-dark  mb-4 pb-2"><strong>Sepete Ekle</strong></p>
+                                            <form asp-controller="Cart" asp-action="AddToCart" method="post">
+                                                <input type="hidden" name="productId" value="@item.ProductId" />
+                                                <input type="hidden" name="quantity" value="1" />
+                                                <button class="ml-3 text-primary btn">
+                                                    <i title="Sepete Ekle" style="margin-left:8px" class=" fa fa-shopping-cart"></i>
+                                                </button>
+
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                            }
+
+                        }
+
+                        else
+                        {
+                            <div style="margin-bottom:200px" class="alert alert-primary">
+                                <h3>Favorilerinizde Ürün Bulunmamaktadır!</h3>
+                            </div>
+                        }
+
+                        <a style="float:right" href="/user/index" class="btn btn-primary btn-lg">  <i class="fas fa-long-arrow-alt-left ms-2"></i>  Alışverişe Dön</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

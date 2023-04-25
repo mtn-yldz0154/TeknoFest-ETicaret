@@ -1,0 +1,365 @@
+﻿@model ProductModel
+@{
+    ViewData["Title"] = "ProductDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="py-4">
+    <div class="container">
+        <div class="row">
+            <aside class="col-lg-5">
+                <div style="margin-right:20px" id="product-carousel" class="carousel slide" data-ride="carousel">
+
+                    <div class="carousel-inner border">
+                        <div class="carousel-item active">
+                            <img class="w-100 h-80" src="~/img/@Model.ProductImageUrl" alt="Image">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="w-100 h-80" src="~/img/@Model.ProductImageUrl2" alt="Image">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="w-100 h-80" src="~/img/@Model.ProductImageUrl3" alt="Image">
+                        </div>
+                       
+                    </div>
+                    <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
+                        <i class="fa fa-2x fa-angle-left text-dark"></i>
+                    </a>
+                    <a class="carousel-control-next" href="#product-carousel" data-slide="next">
+                        <i class="fa fa-2x fa-angle-right text-dark"></i>
+                    </a>
+                </div>
+            </aside>
+
+            <main class="col-lg-7">
+                <article>
+                    <br />
+                    <h4 class="title tex-dark">
+                       @Model.ProductName
+                    </h4>
+                    @if(Model.StarNumber==0)
+                    {
+                        <div class="rating-wrap">
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                    }
+                    @if (Model.StarNumber >0 && Model.StarNumber<=20)
+                    {
+                        <div class="rating-wrap">
+                            <span class="fa fa-star checked "></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                    }
+                    @if (Model.StarNumber >20 && Model.StarNumber <= 40)
+                    {
+                        <div class="rating-wrap">
+                            <span class="fa fa-star checked "></span>
+                            <span class="fa fa-star checked "></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                    }
+                    @if (Model.StarNumber >40 && Model.StarNumber <= 60)
+                    {
+                        <div class="rating-wrap">
+                            <span class="fa fa-star checked "></span>
+                            <span class="fa fa-star checked "></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                    }
+                    @if (Model.StarNumber > 60 && Model.StarNumber <= 80)
+                    {
+                        <div class="rating-wrap">
+                            <span class="fa fa-star checked "></span>
+                            <span class="fa fa-star checked "></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked "></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                    }
+                    @if (Model.StarNumber > 80 )
+                    {
+                        <div class="rating-wrap">
+                            <span class="fa fa-star checked "></span>
+                            <span class="fa fa-star checked "></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked "></span>
+                            <span class="fa fa-star checked"></span>
+                        </div>
+                    }
+
+                    @if(Model.ProductStock>100)
+                    {
+                        <p class="text-success">Stokta</p>
+                    }
+                    @if (Model.ProductStock < 100 && Model.ProductStock>0)
+                    {
+                        <p class="text-danger">Tükenmek Üzere!</p>
+                    }
+                    @if(Model.ProductStock==0)
+                    {
+                        <p class="text-danger">Stokta Yok</p>
+                    }
+
+                    <div class="mb-3">
+                        <b class="price h5">@Model.ProductPrice TL</b>
+                    </div>
+                    <div class="product-desc">
+                        <p>
+                           @Model.ProductDespcription
+                        </p>
+                    </div>
+                    <dl >
+                        <dt style="display:inline">Renk:</dt>
+                        <dd style="display:inline">@Model.ProductOzellik</dd>
+                        
+                    </dl>
+
+
+
+                </article>
+
+              
+                <form asp-controller="Like" asp-action="AddToLike" method="POST" style="position:relative;margin-left:230px">
+                    <input type="hidden" name="productId" value="@Model.ProductId">
+
+
+                    <button type="submit" class="btn  btn-outline-primary">
+                        <i class="fa fa-heart me-1"></i> Listeye Ekle
+                    </button>
+
+
+
+                </form>
+                <form asp-controller="Cart" asp-action="AddToCart" method="POST" style="position:absolute;margin-top:-37px;" >
+                    <input type="hidden" name="productId" value="@Model.ProductId">
+                    <div class="input-group mb-3">
+                        <input style="margin-right:10px;width: 70px;" type="number" name="quantity" class="border-primary" value="1" min="1" step="1">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-outline-primary">
+                                <i class="fas fa-cart-plus"></i> Sepete Ekle
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </main>
+            <div style="margin-top:40px" class="">              
+                   <a style="margin-right:40px" href="/img/@Model.ProductImageUrl">
+                    <img width="120" height="120" src="~/img/@Model.ProductImageUrl" alt="" />
+                    </a>
+                    
+                     <a style="margin-right:40px"  href="/img/@Model.ProductImageUrl2" >
+                    <img width="120" height="120" src="~/img/@Model.ProductImageUrl2" alt="" />
+                    </a>
+
+                <a href="/img/@Model.ProductImageUrl3" >
+                    <img width="120" height="120" src="~/img/@Model.ProductImageUrl3" alt="" />
+                </a>
+                          
+            </div>
+            
+        </div>
+       
+    </div>
+</section>
+<br />
+
+@if(Model.BenzerUrunler.Count()>0)
+{
+<section class="py-4">
+    <div class="container">
+        <header class="section-heading">
+            <h2 class="mb-3 text-center text-primary">Önerilen Ürünler</h2>
+        </header>
+        <div class="row">
+            @foreach (var item in Model.BenzerUrunler)
+            {
+                <div class="col-lg-3 col-sm-6 col-12">
+                    <figure class="card shadow border-primary">
+                            <div>
+                                @if (item.StarNumber == 0)
+                                {
+                                    <div class="rating-wrap">
+                                        <span class="fa fa-star "></span>
+                                        <span class="fa fa-star "></span>
+                                        <span class="fa fa-star "></span>
+                                        <span class="fa fa-star "></span>
+                                        <span class="fa fa-star"></span>
+                                    </div>
+                                }
+                                @if (item.StarNumber > 0 && item.StarNumber <= 20)
+                                {
+                                    <div class="rating-wrap">
+                                        <span class="fa fa-star checked "></span>
+                                        <span class="fa fa-star "></span>
+                                        <span class="fa fa-star "></span>
+                                        <span class="fa fa-star "></span>
+                                        <span class="fa fa-star"></span>
+                                    </div>
+                                }
+                                @if (item.StarNumber > 20 && item.StarNumber <= 40)
+                                {
+                                    <div class="rating-wrap">
+                                        <span class="fa fa-star checked "></span>
+                                        <span class="fa fa-star checked "></span>
+                                        <span class="fa fa-star "></span>
+                                        <span class="fa fa-star "></span>
+                                        <span class="fa fa-star"></span>
+                                    </div>
+                                }
+                                @if (item.StarNumber > 40 && item.StarNumber <= 60)
+                                {
+                                    <div class="rating-wrap">
+                                        <span class="fa fa-star checked "></span>
+                                        <span class="fa fa-star checked "></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star "></span>
+                                        <span class="fa fa-star"></span>
+                                    </div>
+                                }
+                                @if (item.StarNumber > 60 && item.StarNumber <= 80)
+                                {
+                                    <div class="rating-wrap">
+                                        <span class="fa fa-star checked "></span>
+                                        <span class="fa fa-star checked "></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked "></span>
+                                        <span class="fa fa-star"></span>
+                                    </div>
+                                }
+                                @if (item.StarNumber > 80)
+                                {
+                                    <div class="rating-wrap">
+                                        <span class="fa fa-star checked "></span>
+                                        <span class="fa fa-star checked "></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked "></span>
+                                        <span class="fa fa-star checked"></span>
+                                    </div>
+                                }
+                            </div>
+                        <div class="img-wrap">
+                            <a href="/user/productdetails/@item.ProductId">
+                                <span class="topbar">
+                                    <form asp-controller="Like" asp-action="AddToLike" method="POST" style="position:relative;margin-left:230px">
+                                        <input type="hidden" name="productId" value="@Model.ProductId">
+                                        <button title="Favorilere Ekle" type="submit" class="btn btn-outline-primary">
+                                            <i class="fa fa-regular fa-heart fa-lg"></i>
+                                        </button>
+                                    </form>
+
+
+                                </span>
+                                <img src="~/img/@item.ProductSmallImageUrl" alt="" />
+                            </a>
+                        </div>
+                        <figcaption class="info-wrap border-top">
+                            <a href="/user/productdetails/@item.ProductId" class="title">
+                                @item.ProductName
+                                <div class="price-wrap mb-3">
+                                    <strong class="price">@item.ProductPrice</strong>
+                                    <del class="price-old">9.999 TL</del>
+                                </div>
+                                <form asp-controller="Cart" asp-action="AddToCart" method="POST">
+                                    <input type="hidden" name="productId" value="@Model.ProductId">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-outline-primary w-100">
+                                            <i class="fas fa-cart-plus"></i> Sepete Ekle
+                                        </button>
+                                    </div>
+
+
+                                </form>
+
+                            </a>
+                        </figcaption>
+                    </figure>
+                </div>
+            }
+
+
+        </div>
+    </div>
+</section>
+}
+
+
+<br /><br />
+
+
+<div style="margin-left:80px;" class="row">
+           <div class="col-md-6">
+        <h4 class=" text-primary">Ürünle İlgili Yorumlar</h4>
+        <hr />
+        <div style="height: 470px; overflow: scroll;margin-bottom:50px" >
+            @foreach (var item in Model.Yorums)
+        {
+            <div style="margin-left:20px;" class="row">
+                       <div class="col-md-2">
+                           <img style="border-radius:50%" width="90" height="90" src="~/img/@item.UserPP" />
+                       </div>
+                        <div class="col-md-10">
+                        <h4 class="text-primary" style="display:inline">@item.UserName </h4> <span class="text-primary" style="float:right;margin-right:10px">
+                            @item.UserDate.DayOfWeek @if (item.UserName == User.Identity.Name || User.IsInRole("Admin"))
+                            {
+                                <form style="display:inline;float:right;margin-top:-5px" asp-controller="User" asp-action="DeleteComment" method="post">
+                                    <input type="hidden" name="commentId" value="@item.Id" />
+                                    <input type="hidden" name="productId" value="@Model.ProductId" />
+                                    <button type="submit" title="Yorumunu Sil" class="btn text-primary ">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+
+                                </form>
+                            }
+                        </span>
+                        
+                           <br><br>
+                            <span>@item.Comment</span>
+                       
+                        </div>
+                      
+                </div>
+                <br />
+        }
+        </div>
+           </div>
+          
+
+
+
+
+           <div class="col-md-5">
+              
+        <form asp-controller="User" asp-action="AddComment" method="post">
+            <input type="hidden" name="productId" value="@Model.ProductId" />
+            <h4 style="" class="text-primary"> Bir Yorum Yaz</h4>
+            <hr />
+            <br />
+            <div class="form-group">
+                <label  class="text-primary" for="message">Senin Yazın *</label>
+                <textarea name="comment" id="message" cols="30" rows="5" class="form-control"></textarea>
+            </div>
+
+            <br /><br />
+            <div class="form-group mb-0">
+               
+                <button type="submit" class="btn btn-primary">Yorumu Gönder</button>
+            </div>
+        </form>
+           </div>
+       </div>
+
+            

@@ -1,0 +1,43 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "CategoryDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="pt-3">
+    <div class="container">
+        <br />
+        <h3 style="color:#6610f2">@ViewBag.ctg Ürünleri</h3>
+        <hr />
+        <br />
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <figure class="card shadow">
+                        <a href="/user/productdetails/@item.ProductId" class="img-wrap">
+                            <b class="badge bg-success"> İndirim </b>
+                            <img src="~/img/@item.ProductImageUrl" alt="">
+                        </a>
+                        <figcaption class="info-wrap border-top">
+                            <a href="#" class="float-end btn btn-light btn-icon">
+                                <i class="fa fa-heart"></i>
+                            </a>
+                            <a href="" class="title text-truncate">
+                                @item.ProductName
+                            </a>
+                            <div class="price-wrap">
+                                <span class="price">@item.ProductPrice</span>
+                                <del class="price-old">6.999 TL</del>
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+            }
+
+
+        </div>
+    </div>
+</section>

@@ -1,0 +1,141 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "AddProduct";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Ürün Ekle</h1>
+<hr />
+<br />
+
+<form asp-controller="Admin" asp-action="AddProduct" method="POST" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-10">
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
+    </div>
+    <div class="row"></div>
+    <div class="col-md-10">
+
+
+        <div class="form-group row">
+            <label asp-for="ProductName" class="col-sm-2 col-form-label">Ürün Adı</label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="ProductName">
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+        <div class="form-group row">
+            <label asp-for="ProductLongName" class="col-sm-2 col-form-label">Ürün Uzun Adı</label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="ProductLongName">
+                <span asp-validation-for="ProductLongName" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+        <div class="form-group row">
+            <label asp-for="ProductDespcription" class="col-sm-2 col-form-label">Ürün Açıklama</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" asp-for="ProductDespcription"></textarea>
+                <span asp-validation-for="ProductDespcription" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+        <div class="form-group row">
+            <label asp-for="ProductStock" class="col-sm-2 col-form-label">Stok Sayısı</label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="ProductStock">
+                <span asp-validation-for="ProductStock" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+
+        <div class="form-group row">
+            <label asp-for="ProductOzellik" class="col-sm-2 col-form-label">Özellik</label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="ProductOzellik">
+                <span asp-validation-for="ProductOzellik" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+        <div class="form-group row">
+            <label asp-for="StarNumber" class="col-sm-2 col-form-label">Yıldız Sayısı</label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="StarNumber">
+                <span asp-validation-for="ProductPrice" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+        <div class="form-group row">
+            <label asp-for="ProductPrice" class="col-sm-2 col-form-label">Fiyat</label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="ProductPrice">
+                <span asp-validation-for="ProductPrice" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+        <div class="form-group row">
+            <label asp-for="SaleProductPrice" class="col-sm-2 col-form-label">İndrimli Fiyat</label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="SaleProductPrice">
+                <span asp-validation-for="ProductPrice" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+
+        <div class="form-group row">
+            <label asp-for="CategoryId" class="col-sm-2 col-form-label">Kategori Seçiniz</label>
+            <div class="col-sm-10">
+                @Html.DropDownListFor(i=>i.CategoryId,(List<SelectListItem>)ViewBag.Values,new{@class="form-control"})
+            </div>
+        </div>
+
+        <br /><br />
+
+        <div class="form-group row">
+            <label asp-for="ProductImageUrl" class="col-sm-2 col-form-label">Resim</label>
+            <div class="col-sm-10">
+                <input type="hidden" asp-for="ProductImageUrl">
+                <input type="file" name="file">
+            </div>
+        </div>
+        <br />
+        <div class="form-group row">
+            <label asp-for="ProductImageUrl2" class="col-sm-2 col-form-label">Resim2</label>
+            <div class="col-sm-10">
+                <input type="hidden" asp-for="ProductImageUrl2">
+                <input type="file" name="file2">
+            </div>
+        </div>
+        <br />
+        <div class="form-group row">
+            <label asp-for="ProductImageUrl3" class="col-sm-2 col-form-label">Resim3</label>
+            <div class="col-sm-10">
+                <input type="hidden" asp-for="ProductImageUrl3">
+                <input type="file" name="file3">
+            </div>
+        </div>
+        <br />
+
+        <div class="form-group row">
+            <label asp-for="ProductSmallImageUrl" class="col-sm-2 col-form-label">Küçük Resim</label>
+            <div class="col-sm-10">
+                <input type="hidden" asp-for="ProductSmallImageUrl">
+                <input type="file" name="files">
+            </div>
+        </div>
+
+        <br />
+
+        <div class=" ">
+            <div class=" offset-sm-2">
+                <button type="submit" class="btn btn-outline-primary">Ürün Ekle</button>
+            </div>
+        </div>
+
+        <br /><br />
+    </div>
+
+</form>
+

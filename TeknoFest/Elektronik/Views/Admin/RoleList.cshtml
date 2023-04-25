@@ -1,0 +1,51 @@
+﻿@model IEnumerable<IdentityRole>
+@{
+    ViewData["Title"] = "RoleList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h1>Roller</h1>
+<hr />
+<br />
+<table class="table table-bordered table-striped table-hover table-dark">
+
+    <thead>
+
+        <tr>
+            <th width="450px">Id</th>
+            <th>Rol Adı</th>
+            <th width="150px">Düzenle</th>
+            <th width="150px">Sil</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @if(Model.Count()>0)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td><a class="btn btn-info" href="/admin/roleedit/@item.Id">Düzenle</a></td>
+                    <td><a class="btn btn-danger" href="/admin/deleterole/@item.Id">Sil</a></td>
+                </tr>
+            }
+        }
+        @if(Model.Count()==0)
+        {
+            <div class="alert alert-danger">
+                
+                
+                <h3>Rol Bulunmamaktadır!</h3>
+            </div>
+        }
+
+       
+
+    </tbody>
+
+</table>
+<a class="btn btn-primary" href="/admin/createrole">Rol Ekle</a>

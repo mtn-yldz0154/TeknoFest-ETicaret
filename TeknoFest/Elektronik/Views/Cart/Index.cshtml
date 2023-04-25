@@ -1,0 +1,153 @@
+﻿@model CartModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="c:\users\metin yıldız\onedrive - klu.edu.tr\masaüstü\elektronik\elektronik\wwwroot\css\cart.css" rel="stylesheet" />
+<section class="h-100 h-custom" style="background-color: #eee;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body p-4">
+
+                        <div class="row">
+
+                            <div class="col-lg-7">
+                                <h1 class="mb-3 text-primary">
+                                    <i class=" fa fa-shopping-cart"></i> Alışveriş Sepeti
+                                </h1>
+                                <hr>
+                                @if(Model.CartItems.Count()>0)
+                                {
+                                    <div class="d-flex justify-content-between align-items-center mb-4">
+                                        <div>
+                                            <p style="color:dimgrey" class="mb-1">Alışveriş Sepetiniz</p>
+                                            <p style="color:dimgrey" class="mb-0">Sepetinizde @Model.CartItems.Count() Adet Farklı Ürün Bulunmaktadır</p>
+                                        </div>
+
+                                    </div>
+
+                                    @foreach (var item in Model.CartItems)
+                                    {
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="d-flex flex-row align-items-center">
+                                                        <div>
+                                                            <img src="~/img/@item.ImageUrl"
+                                                         class="img-fluid rounded-3" alt="Shopping item" style="width: 135px;">
+                                                        </div>
+                                                        <div class="ms-2">
+                                                            <h5>@item.Name</h5>
+                                                            <p class=" mb-0">@item.Color</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex flex-row align-items-center">
+                                                        <div style="width: 50px;">
+                                                            <h5 class="fw-normal mb-0">@item.Quantity</h5>
+                                                        </div>
+                                                        <div style="width: 150px;">
+                                                            <h5 class="mb-0">@((item.Price * item.Quantity).ToString("c"))</h5>
+                                                        </div>
+                                                        <form asp-controller="Cart" asp-action="DeleteCart" method="post">
+                                                            <input type="hidden" name="productId" value="@item.ProductId">
+                                                            <button title="Sepetten Sil"  class="btn text-primary ">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </button>
+
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                      
+                                    }
+                                    <a  href="~/user/index" style="margin-top:90px;background-color:darkgray" class="btn btn-block btn-lg">
+                                        <i class="fas fa-long-arrow-alt-left ms-2"></i> Alışverişe Dön
+                                    </a>                 
+                                }
+
+                                else
+                                {
+                                    <div style="margin-top:50px;" class=" alert alert-primary">
+                                        <h3>Sepetinizde Ürün Bulunmamaktadır!</h3>
+                                    </div>
+
+                                    <a href="~/user/index" style="margin-top:200px;background-color:darkgray" class="btn btn-block btn-lg">
+                                        <i class="fas fa-long-arrow-alt-left ms-2"></i> Alışverişe Dön
+                                    </a>
+                                }
+
+                               
+                            </div>
+                            <div style="margin-top:55px" class="col-lg-5">
+
+                                <div class="card bg-primary text-white rounded-3">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center mb-4">
+                                            <h5 class="mb-0">Alışveriş Sepet Özet Bilgileri</h5>
+                                            <img  src="~/img/@User.Identity.Name .jpg"
+                                                 class="" style="width: 55px;border-radius:50%" alt="Avatar">
+                                        </div>
+                                        @foreach (var item in Model.CartItems)
+                                        {
+                                            <div class="row">
+
+                                                <div class="col-md-8">
+                                                    <p>@item.Name</p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <span>@item.Quantity Adet</span>
+                                                    <span style="margin-left:15px"> @(item.Quantity*item.Price) TL </span>
+                                                </div>
+
+                                            </div>
+                                        }
+                                            
+                                         
+                                      
+
+                                        
+                                            
+
+                                            <hr class="my-4">
+                                            @if (Model.CartItems.Count() > 0)
+                                            {
+                                                <div class="d-flex justify-content-between">
+                                                    <p class="mb-2">Sepet Tutarı</p>
+                                                    <p class="mb-2">@Model.TotalPrice().ToString("c")</p>
+                                                </div>
+
+                                                
+
+                                                <div class="d-flex justify-content-between mb-4">
+                                                    <p class="mb-2">Sipariş Tutarı</p>
+                                                    <p class="mb-2">@((Model.TotalPrice() + 20).ToString("c"))</p>
+                                                </div>
+
+                                                <a href="/cart/checkout" style="background-color:darkgray;width:470px;" class="btn btn-block btn-lg">
+                                                    <div class=" justify-content-between">
+                                                        <span style="float:left">@((Model.TotalPrice() + 20).ToString("c"))</span>
+                                                        <span style="float:right">Ödemeye Git<i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                                                    </div>
+                                                </a>
+                                            }
+                                  
+                                        
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                       
+                    </div>
+                    
+                </div>
+                
+            </div>
+           
+        </div>
+    </div>
+</section>

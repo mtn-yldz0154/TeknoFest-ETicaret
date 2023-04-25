@@ -1,0 +1,47 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "GetProduct";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h1>Ürünler</h1>
+<hr />
+<br />
+
+<table class="table table-bordered table-striped table-hover table-info">
+
+    <thead>
+
+        <tr>
+            <th>Id</th>
+            <th>Ürün Resmi</th>
+            <th>Ürün Adı</th>
+            <th>Detay</th>
+            <th>Düzenle</th>
+            <th>Sil</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>@item.ProductId</td>
+                <td> <img width="50" height="50" src="~/img/@item.ProductSmallImageUrl" /> </td>
+                <td>@item.ProductName</td>
+                <td> <a href="/admin/productdetails/@item.ProductId" class="btn btn-outline-success">Detay</a>  </td>
+                <td> <a href="/admin/updateproduct/@item.ProductId" class="btn btn-outline-info">Düzenle</a>  </td>
+                <td> <a href="/admin/deleteproduct/@item.ProductId" class="btn btn-outline-danger">Sil</a>  </td>
+
+            </tr>
+        }
+
+
+    </tbody>
+</table>
+
+<a class="ml-3 btn btn-outline-primary" href="/admin/addproduct">Ürün Ekle</a>
+

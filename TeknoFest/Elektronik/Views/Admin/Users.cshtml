@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Customer>
+@{
+    ViewData["Title"] = "Users";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Kullanıcılar</h1>
+
+<hr>
+<br />
+
+
+<div class="row">
+    <div class="col-md-12">
+      
+        <table  id="myTable" class="table table-bordered table-striped table-hover table-dark mt-3">
+            <thead>
+                <tr>
+                    <td>FirstName</td>
+                    <td>LastName</td>
+                    <td>UserName</td>
+                    <td>Email</td>
+                    <td>EmailConfirmed</td>
+                    <td style="width: 200px;"></td>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count() > 0)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr class="@(item.EmailConfirmed?"":"bg-warning")">
+                            <td>@item.FirstName</td>
+                            <td>@item.LastName</td>
+                            <td>@item.UserName</td>
+                            <td>@item.Email</td>
+                            <td>@item.EmailConfirmed</td>
+                            <td>
+                                <a href="/admin/useredit/@item.Id" class="btn btn-primary  mr-2">Düzenle</a>
+
+                                <form action="/admin/user/delete" method="POST" style="display: inline;">
+                                    <input type="hidden" name="UserId" value="@item.Id">
+                                    <button type="submit" class="btn btn-danger ">Sil</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <div class="alert alert-warning">
+                        <h3>No Users</h3>
+                    </div>
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<a class="btn btn-primary " href="/admin/user/create">Yeni Kullanıcı</a>

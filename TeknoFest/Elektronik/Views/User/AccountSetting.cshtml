@@ -1,0 +1,76 @@
+﻿@model UserAccountModel
+@{
+    ViewData["Title"] = "AccountSetting";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div style="margin-left:45px;margin-bottom:80px">
+<h3 class="text-primary">Hesap Ayarları</h3>
+<hr />
+
+    <form asp-controller="User" asp-action="AccountSetting" method="POST">
+    <div class="row">
+        <div class="col-md-12">
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
+    </div>
+    <div class="row">
+            <div class="col-md-2">
+                <img style="border-radius:50%" width="200px" height="200px" src="~/img/@User.Identity.Name .jpg" />
+                </div>
+        <div class="col-md-10">
+           
+            
+            <div class="form-group row">
+                    <label asp-for="FirstName" class="col-sm-2 col-form-label"><b>Adınız</b></label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="FirstName">
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                    <label asp-for="LastName" class="col-sm-2 col-form-label"><b>Soyadınız</b></label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="LastName">
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                    <label asp-for="UserName" class="col-sm-2 col-form-label"><b>Kullanıcı Adınız</b></label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="UserName">
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                    <label asp-for="Email" class="col-sm-2 col-form-label"><b>Mail Hesabınız</b></label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="Email">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+                <div class="form-group row">
+                    <label asp-for="Password"  class="col-sm-2 col-form-label"><b>Parolanız</b></label>
+                    <div class="col-sm-10">
+                        <input class="form-control" asp-for="Password" type="password">
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+                <br />
+
+            <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-primary">Değişiklikleri Kaydet</button>
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+
+</form>
+</div>
